@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: #232334;
+}
+
+.info {
+   width: 50%;
+   display: flex;
+   top: 40%;
+   left:50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%);
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+}
+
+button {
+    top:50%;
+    width: 50%;
+    gap: 2%;
+    margin-bottom: 2%;
+}
+
+.textareas {
+    background-color: #40405e;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-color: black;
+    border-width: 3px;
+    border-radius: 10px;
+    scroll-behavior: smooth;
+    resize: none;
+    color: azure;
+}
+
+#spistresci {
+    height: 300px;
+    color: azure;
+}
+
+.przyciski {
+    flex-direction: row;
+    margin-left: 25%;
+}
+
+::placeholder{
+    position: absolute;
+    left: 10%;
+    top: 30%;
+    color: azure;
+    
+    
+}
