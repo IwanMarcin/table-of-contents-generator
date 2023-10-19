@@ -1,4 +1,4 @@
-# table-of-contest-generator
+# table-of-contents-generator
 This is my very first SEO tool. 
 
 <h1>Table of contents generator by IwanMarcin</h1>
