@@ -1,97 +1,61 @@
-let gen = document.getElementById("generate");
-let genen = document.getElementById("generateen");
+let generatePL = document.getElementById("generate");
+let generateEN = document.getElementById("generateen");
 
-gen.addEventListener('click', function(){
-
-
-let htmltextarea = document.getElementById("htmltextarea");
-let text = htmltextarea.value;
-
-let tempDiv = document.createElement("div");
-tempDiv.innerHTML = text;
-
-let h2Tags = tempDiv.querySelectorAll("h2");
-let h2Texts = [];
-
-h2Tags.forEach(function (h2Tag) {
-    h2Texts.push(h2Tag.textContent);
-});
-
-function transformText(text) {
-    text = text.toLowerCase();
-
-    text = text.split("ł").join("l");
-
-    text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-    text = text.replace(/[^a-zA-Z0-9 -]/g, "");
-    
-    text = text.replace(/ /g, "-");
-    
-    return text;
-}
-
-let transformedTexts = h2Texts.map(function (text) {
-    return transformText(text);
-});
-
-console.log(transformedTexts);
-console.log(h2Texts);
-
-let ans = `<p><b>Spis treści</b></p>
-<ul>
-`
-for (let i = 0; i <= h2Texts.length - 1; i++){
-    ans = ans + `<li><a href="#${transformedTexts[i]}">${h2Texts[i]}</a></li>\n`;
-}
-ans += `</ul>`;
-
-console.log(ans);
-document.getElementById("spistresci").innerHTML = ans;
-});
-
-genen.addEventListener('click', function(){
+function tableOfContents(content){
     let htmltextarea = document.getElementById("htmltextarea");
-    let text = htmltextarea.value;
-    
+    let textFromUser = htmltextarea.value;
+
     let tempDiv = document.createElement("div");
-    tempDiv.innerHTML = text;
-    
+    tempDiv.innerHTML = textFromUser;
+
     let h2Tags = tempDiv.querySelectorAll("h2");
     let h2Texts = [];
-    
+
     h2Tags.forEach(function (h2Tag) {
-        h2Texts.push(h2Tag.textContent);
+            h2Texts.push(h2Tag.textContent);
+        }
+    );
+
+    const transformText = (textFromUser) => textFromUser
+        .toLowerCase()
+        .split("ł")
+        .join("l")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9 -]/g, "")
+        .replace(/ /g, "-");
+
+    let transformedTexts = h2Texts.map(function (textFromUser) {
+        return transformText(textFromUser);
     });
-    
-function transformText(text) {
-    text = text.toLowerCase();
-    
-    text = text.split("ł").join("l");
-    
-    text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    
-    text = text.replace(/[^a-zA-Z0-9 -]/g, "");
+
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(textFromUser, 'text/html');
+    let genenidh2 = doc.querySelectorAll('h2');
         
-    text = text.replace(/ /g, "-");
-        
-    return text;
+    for (let i=0; i < genenidh2.length; i++) {
+        genenidh2[i].id = transformedTexts[i];
     }
     
-    let transformedTexts = h2Texts.map(function (text) {
-        return transformText(text);
-    });
+    textFromUser = doc.body.innerHTML;
     
-    
-let ans = `<p><b>Table of Contents</b></p>
-<ul>
-`
-    for (let i = 0; i <= h2Texts.length - 1; i++){
-        ans = ans + `<li><a href="#${transformedTexts[i]}">${h2Texts[i]}</a></li>\n`;
+    for (let i = 0; i <= h2Texts.length - 1; i++) {
+        content = content + `<li><a href="#${transformedTexts[i]}">${h2Texts[i]}</a></li>\n`;
     }
-    ans += `</ul>`;
-    
-    
-    document.getElementById("spistresci").innerHTML = ans;
-    });
+
+    content += `</ul>`;
+    document.getElementById("spistresci").innerHTML = `${content} \n ${textFromUser}`;
+
+    return h2Texts;
+}
+
+generatePL.addEventListener('click', function() {
+    let content = `<p><b>Spis treści</b></p>\n<ul>`;
+    tableOfContents(content);    
+});
+
+generateEN.addEventListener('click', function() {
+    let content = `<p><b>Table of Contents</b></p>\n<ul>`;
+    tableOfContents(content);
+})
     
