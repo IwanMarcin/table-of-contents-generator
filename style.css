@@ -9,10 +9,16 @@ body{
     background: #232334;
 }
 
+
+
+.header{
+  position: absolute;
+}
+
 .info {
    width: 50%;
    display: flex;
-   top: 40%;
+   top: 60%;
    left:50%;
    margin-right: -50%;
    transform: translate(-50%, -50%);
@@ -33,7 +39,8 @@ button {
     cursor: pointer;
     font-size: 16px;
     position: relative;
-    margin: 5%;
+    margin-top: 6%;
+    margin-left: 5%;
 }
 
 .textareas {
@@ -46,6 +53,7 @@ button {
     scroll-behavior: smooth;
     resize: none;
     color: azure;
+    height: 120px;
 }
 
 #spistresci {
@@ -72,7 +80,7 @@ h1 {
     text-align: center;
     position: absolute;
     color: azure;
-
+    margin-top: 5%;
 }
 
 button::before, button::after{
@@ -101,4 +109,15 @@ button::before, button::after{
   
   .button:hover::after{
     right: 80%;
+  }
+
+  .input{
+    flex-direction: row;
+    display: flex;
+  }
+
+  .options{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
   }

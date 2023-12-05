@@ -7,10 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Generator Spisów Treści</h1>
+    <div class="header">
+        <h1>Generator Spisów Treści</h1>
+    </div>
+   
     <div class="info">
+
+        <div class="input">
+            <div class="options">
+        <button type="button" id="reset">RESET</button>
+        <button type="button" id="h3option">H3 OFF</button>
+            </div>
         <textarea id="htmltextarea" class="textareas" placeholder="Wprowadź kod HTML (CTRL+V)"></textarea>
-        
+        </div>
        
         <div class="przyciski">
             <button type="button" id="generate" >
@@ -20,8 +29,6 @@
             GENERUJ SPIS TREŚCI EN
             </button>
         </div>
-        
-    
     
         <textarea id = "spistresci" class="textareas"></textarea>
     </div>
